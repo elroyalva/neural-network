@@ -125,10 +125,6 @@ def preprocess():
     disint=np.split(valid_comb,[784],1)
     validation_data=disint[0]
     validation_label=disint[1]
-    
-    #Feature Selection
-    variance= np.var(train,0).astype(np.int64)
-
     test_data = test
     test_label = vectest
 
@@ -138,6 +134,11 @@ def preprocess():
     print validation_label.shape
     print test_data.shape
     print test_label.shape
+    
+    #Feature Selection
+    variance= np.var(train,0).astype(np.int64)
+
+    
     
     return train_data, train_label, validation_data, validation_label, test_data, test_label
     
