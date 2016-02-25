@@ -3,6 +3,8 @@ from scipy.optimize import minimize
 from scipy.io import loadmat
 from math import sqrt
 
+from sklearn.cross_validation import train_test_split
+
 
 def initializeWeights(n_in,n_out):
     """
@@ -63,27 +65,28 @@ def preprocess():
     #Creating train data
     train= mat.get('train0')
     
-    vec=np.zeros(len(train))
-  
+    
+    vec=np.zeros(len(train))[...,None]
+    #print vec.shape
     for i in range(1,10):
         traint= mat.get('train'+str(i))
         train=np.append(train,traint,axis=0)
 
-        vect=np.zeros(len(traint))
+        vect=np.zeros(len(traint))[...,None]
         vect=vect+i
         vec=np.append(vec,vect,axis=0)
 
     vec=vec.astype(np.int64)
-
+    #print vec
     #Test data
     test= mat.get('test0')
-    vectest=np.zeros(len(test))
+    vectest=np.zeros(len(test))[...,None]
   
     for i in range(1,10):
         testt= mat.get('test'+str(i))
         test=np.append(test,testt,axis=0)
 
-        vectestt=np.zeros(len(testt))
+        vectestt=np.zeros(len(testt))[...,None]
         vectestt=vectestt+i
         vectest=np.append(vectest,vectestt,axis=0)
 
@@ -93,26 +96,48 @@ def preprocess():
     train=train.astype(np.float64)
     test=test.astype(np.float64)
 
-    a=train.max(axis=1)
-    print a.shape
-    train=train/train.max(axis=1)
-    test=test/test.max(axis=1)
+    train_rows= train.shape[0]
+    test_rows= test.shape[0]
 
-    print train.max
-    print test.max
+    for i in range(0,train_rows):
+        temp=train[i,:]
+        temp_max=temp.max()
+        train[i,:]=temp/temp_max
+        
+    for i in range(0,test_rows):
+        temp=test[i,:]
+        temp_max=temp.max()
+        test[i,:]=temp/temp_max
+    
+   
     #Randomly split
+    
 
+    combined=np.append(train,vec,axis=1)
+    
+    train_comb, valid_comb = train_test_split(combined, test_size = 0.16666)
+    
+  
+    disint=np.split(train_comb,[784],1)
+    train_data=disint[0]
+    train_label=disint[1]
+
+    disint=np.split(valid_comb,[784],1)
+    validation_data=disint[0]
+    validation_label=disint[1]
+    
     #Feature Selection
     variance= np.var(train,0).astype(np.int64)
 
+    test_data = test
+    test_label = vectest
 
-    
-    train_data = np.array([])
-    train_label = np.array([])
-    validation_data = np.array([])
-    validation_label = np.array([])
-    test_data = np.array([])
-    test_label = np.array([])
+    print train_data.shape
+    print train_label.shape
+    print validation_data.shape
+    print validation_label.shape
+    print test_data.shape
+    print test_label.shape
     
     return train_data, train_label, validation_data, validation_label, test_data, test_label
     
