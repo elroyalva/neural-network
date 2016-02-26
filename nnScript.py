@@ -30,14 +30,15 @@ def sigmoid(z):
     """# Notice that z can be a scalar, a vector or a matrix
     # return the sigmoid of input z"""
     if type(z)==types.FloatType:
-        return z=1/(1+math.exp(-1*z))
+        z=1/(1+math.exp(-1*z))
+        return z
     else:
         z=np.multiply(z,-1)
         z=np.exp(z)
         z=np.add(z,1)
         z=np.divide(1,z)
         return z
-    return  #your code here
+    #your code here
     
     
 
@@ -238,24 +239,27 @@ def nnPredict(w1,w2,data):
 
 """**************Neural Network Script Starts here********************************"""
 
-train_data, train_label, validation_data,validation_label, test_data, test_label = preprocess();
+#train_data, train_label, validation_data,validation_label, test_data, test_label = preprocess();
 
 
 #  Train Neural Network
 
 # set the number of nodes in input unit (not including bias unit)
-#n_input = train_data.shape[1]; 
+n_input = train_data.shape[1]; 
 
 # set the number of nodes in hidden unit (not including bias unit)
-#n_hidden = 50;
+n_hidden = 50;
 				   
 # set the number of nodes in output unit
-#n_class = 10;				   
+n_class = 10;				   
 
 # initialize the weights into some random matrices
-#initial_w1 = initializeWeights(n_input, n_hidden);
-#initial_w2 = initializeWeights(n_hidden, n_class);
+initial_w1 = initializeWeights(n_input, n_hidden);
+initial_w2 = initializeWeights(n_hidden, n_class);
 
+print initial_w1
+print type(initial_w1)
+print initial_w1.shape
 # WE NEED FLOAT WEIGHTS!
 
 # unroll 2 weight matrices into single column vector
