@@ -2,7 +2,8 @@ import numpy as np
 from scipy.optimize import minimize
 from scipy.io import loadmat
 from math import sqrt
-
+import types
+import math
 from sklearn.cross_validation import train_test_split
 
 
@@ -28,7 +29,14 @@ def sigmoid(z):
     
     """# Notice that z can be a scalar, a vector or a matrix
     # return the sigmoid of input z"""
-    
+    if type(z)==types.FloatType:
+        return z=1/(1+math.exp(-1*z))
+    else:
+        z=np.multiply(z,-1)
+        z=np.exp(z)
+        z=np.add(z,1)
+        z=np.divide(1,z)
+        return z
     return  #your code here
     
     
@@ -128,12 +136,7 @@ def preprocess():
     test_data = test
     test_label = vectest
 
-    print train_data.shape
-    print train_label.shape
-    print validation_data.shape
-    print validation_label.shape
-    print test_data.shape
-    print test_label.shape
+
     
     #Feature Selection
     variance= np.var(train,0).astype(np.int64)
@@ -252,6 +255,8 @@ train_data, train_label, validation_data,validation_label, test_data, test_label
 # initialize the weights into some random matrices
 #initial_w1 = initializeWeights(n_input, n_hidden);
 #initial_w2 = initializeWeights(n_hidden, n_class);
+
+# WE NEED FLOAT WEIGHTS!
 
 # unroll 2 weight matrices into single column vector
 # initialWeights = np.concatenate((initial_w1.flatten(), initial_w2.flatten()),0)
