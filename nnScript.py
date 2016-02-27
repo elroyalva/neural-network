@@ -220,9 +220,9 @@ def nnObjFunction(params, *args):
     #print res1
     l=sigmoid(res1) #applying sigma on every entry
 
-    print l.shape
+    print (l.shape)
     oneOfK=label_binarize(training_label, classes=[0,1,2,3,4,5,6,7,8,9])
-    print oneOfK.shape
+    print (oneOfK.shape)
     obj_val = 0  
     
     #Your code here
