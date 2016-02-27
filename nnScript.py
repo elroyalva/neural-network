@@ -263,13 +263,16 @@ def nnPredict(w1,w2,data):
     
     #data=np.array([[1,2,3],[3,2,3],[2,3,4]]) #data=3 training with 4 attributes each
 
-    #w1=np.array([[0.1,0.2],[0.2,0.3],[0.1,0.1],[0.2,0.3]]) #two hidden nodes
-    #w2=np.array([[0.1,0.2,0.1,0.2],[0.1,0.2,0.2,0.1],[0.2,0.2,0.3,0.2]])# four output nodes
+
+    #w1=np.array([[0.1,0.2,0.1,0.2],[0.2,0.3,0.1,0.3]]) two hidden nodes so two rows
+    #w2=np.array([[0.1,0.1,0.2],[0.2,0.2,0.2],[0.1,0.2,0.3],[0.2,0.1,0.2]]) 4 output nodes so 4 rows
+    
     #print w1.shape
     temp=np.ones(len(data))[...,None]  #adding 1s to data
     data=np.append(data,temp,axis=1)
     #print w1
-    res=np.dot(data,w1) #getting first sum-product at hidden node
+    w1t=np.transpose(w1)
+    res=np.dot(data,w1t) #getting first sum-product at hidden node
     #print res
     #print res
     z=sigmoid(res)  #applying sigma on every entry
@@ -277,8 +280,8 @@ def nnPredict(w1,w2,data):
     #columns=z.shape[0]
     temp=np.ones(len(z))[...,None]  #adding 1s to hidden node values
     z=np.append(z,temp,axis=1)
-    
-    res1=np.dot(z,w2) #getting final sum-product at output node
+    w2t=np.transpose(w2)
+    res1=np.dot(z,w2t) #getting final sum-product at output node
     #print res1
     l=sigmoid(res1) #applying sigma on every entry
     #print l
