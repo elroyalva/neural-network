@@ -227,12 +227,28 @@ def nnPredict(w1,w2,data):
     %       vector of a particular image
        
     % Output: 
-    % label: a column vector of predicted labels""" 
+    % label: a column vector of predicted labels"""
     
-    labels = np.array([])
-    #Your code here
+    temp=np.ones(len(data))[...,None]  #adding 1s to data
+    data=np.append(data,temp,axis=1)
+    
+    res=np.dot(data,w1) #getting first sum-product at hidden node
+    #print res
+    z=sigmoid(res)  #applying sigma on every entry
+    #print z
+    #columns=z.shape[0]
+    temp=np.ones(len(z))[...,None]  #adding 1s to hidden node values
+    z=np.append(z,temp,axis=1)
+    
+    res1=np.dot(z,w2) #getting final sum-product at output node
+    l=sigmoid(res1) #applying sigma on every entry
+    #print l
+    labels = np.amax(l, axis=1) # using maximum out of all output values
+    #print labels
     
     return labels
+    #Your code here
+
     
 
 
