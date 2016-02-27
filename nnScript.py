@@ -209,7 +209,12 @@ def nnObjFunction(params, *args):
     
     return (obj_val,obj_grad)
 
+#matrices to check
 
+#data=np.array([[1,2,3],[3,2,3],[2,3,4]]) #data=3 training with 4 attributes each
+
+#w1=np.array([[1,2],[2,3],[1,1],[2,3]]) #two hidden nodes
+#w2=np.array([[1,2,1,2],[1,2,2,1],[2,2,3,2]])# four output nodes
 
 def nnPredict(w1,w2,data):
     
