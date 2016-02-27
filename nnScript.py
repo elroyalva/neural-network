@@ -5,7 +5,7 @@ from math import sqrt
 import types
 import math
 from sklearn.cross_validation import train_test_split
-
+from sklearn.preprocessing import label_binarize
 
 def initializeWeights(n_in,n_out):
     """
@@ -152,7 +152,7 @@ def preprocess():
 def nnObjFunction(params, *args):
     """% nnObjFunction computes the value of objective function (negative log 
     %   likelihood error function with regularization) given the parameters 
-    %   of Neural Networks, thetraining data, their corresponding training 
+    %   of Neural Networks, the training data, their corresponding training 
     %   labels and lambda - regularization hyper-parameter.
 
     % Input:
@@ -191,6 +191,38 @@ def nnObjFunction(params, *args):
     
     w1 = params[0:n_hidden * (n_input + 1)].reshape( (n_hidden, (n_input + 1)))
     w2 = params[(n_hidden * (n_input + 1)):].reshape((n_class, (n_hidden + 1)))
+
+
+    
+    #print w1.shape
+    #print w2.shape
+
+    #print training_data.shape
+    #ACTUALLY NEED THE EXACT BVALUES HERE; INSTEAD OF THE THRESHOLDED. SO WRITE THE METHOD HERE AGAIN OR WRITE A NEW METHOD
+    data=(training_data)
+    w1temp=np.transpose(w1)
+    w2temp=np.transpose(w2)
+
+    temp=np.ones(len(data))[...,None]  #adding 1s to data
+    data=np.append(data,temp,axis=1)
+    #print w1
+    
+    res=np.dot(data,w1temp) #getting first sum-product at hidden node
+    #print res
+    #print res
+    z=sigmoid(res)  #applying sigma on every entry
+    #print z
+    #columns=z.shape[0]
+    temp=np.ones(len(z))[...,None]  #adding 1s to hidden node values
+    z=np.append(z,temp,axis=1)
+    
+    res1=np.dot(z,w2temp) #getting final sum-product at output node
+    #print res1
+    l=sigmoid(res1) #applying sigma on every entry
+
+    print l.shape
+    oneOfK=label_binarize(training_label, classes=[0,1,2,3,4,5,6,7,8,9])
+    print oneOfK.shape
     obj_val = 0  
     
     #Your code here
@@ -209,12 +241,7 @@ def nnObjFunction(params, *args):
     
     return (obj_val,obj_grad)
 
-#matrices to check
 
-#data=np.array([[1,2,3],[3,2,3],[2,3,4]]) #data=3 training with 4 attributes each
-
-#w1=np.array([[1,2],[2,3],[1,1],[2,3]]) #two hidden nodes
-#w2=np.array([[1,2,1,2],[1,2,2,1],[2,2,3,2]])# four output nodes
 
 def nnPredict(w1,w2,data):
     
@@ -232,12 +259,18 @@ def nnPredict(w1,w2,data):
     %       vector of a particular image
        
     % Output: 
-    % label: a column vector of predicted labels"""
+    % label: a column vector of predicted labels""" 
     
+    #data=np.array([[1,2,3],[3,2,3],[2,3,4]]) #data=3 training with 4 attributes each
+
+    #w1=np.array([[0.1,0.2],[0.2,0.3],[0.1,0.1],[0.2,0.3]]) #two hidden nodes
+    #w2=np.array([[0.1,0.2,0.1,0.2],[0.1,0.2,0.2,0.1],[0.2,0.2,0.3,0.2]])# four output nodes
+    #print w1.shape
     temp=np.ones(len(data))[...,None]  #adding 1s to data
     data=np.append(data,temp,axis=1)
-    
+    #print w1
     res=np.dot(data,w1) #getting first sum-product at hidden node
+    #print res
     #print res
     z=sigmoid(res)  #applying sigma on every entry
     #print z
@@ -246,21 +279,21 @@ def nnPredict(w1,w2,data):
     z=np.append(z,temp,axis=1)
     
     res1=np.dot(z,w2) #getting final sum-product at output node
+    #print res1
     l=sigmoid(res1) #applying sigma on every entry
+    #print l
     #print l
     labels = np.amax(l, axis=1) # using maximum out of all output values
     #print labels
     
     return labels
-    #Your code here
-
     
 
 
 
 """**************Neural Network Script Starts here********************************"""
 
-#train_data, train_label, validation_data,validation_label, test_data, test_label = preprocess();
+train_data, train_label, validation_data,validation_label, test_data, test_label = preprocess();
 
 
 #  Train Neural Network
@@ -278,25 +311,24 @@ n_class = 10;
 initial_w1 = initializeWeights(n_input, n_hidden);
 initial_w2 = initializeWeights(n_hidden, n_class);
 
-print initial_w1
-print type(initial_w1)
-print initial_w1.shape
+
 # WE NEED FLOAT WEIGHTS!
 
 # unroll 2 weight matrices into single column vector
-# initialWeights = np.concatenate((initial_w1.flatten(), initial_w2.flatten()),0)
+initialWeights = np.concatenate((initial_w1.flatten(), initial_w2.flatten()),0)
 
 # set the regularization hyper-parameter
-# lambdaval = 0;
+lambdaval = 0;
 
 
-# args = (n_input, n_hidden, n_class, train_data, train_label, lambdaval)
+args = (n_input, n_hidden, n_class, train_data, train_label, lambdaval)
 
 #Train Neural Network using fmin_cg or minimize from scipy,optimize module. Check documentation for a working example
 
-# opts = {'maxiter' : 50}    # Preferred value.
+opts = {'maxiter' : 50}    # Preferred value.
+#nnPredict(initial_w1,initial_w2,train_data)
 
-# nn_params = minimize(nnObjFunction, initialWeights, jac=True, args=args,method='CG', options=opts)
+nn_params = minimize(nnObjFunction, initialWeights, jac=True, args=args,method='CG', options=opts)
 
 #In Case you want to use fmin_cg, you may have to split the nnObjectFunction to two functions nnObjFunctionVal
 #and nnObjGradient. Check documentation for this function before you proceed.
@@ -304,9 +336,10 @@ print initial_w1.shape
 
 
 #Reshape nnParams from 1D vector into w1 and w2 matrices
-# w1 = nn_params.x[0:n_hidden * (n_input + 1)].reshape( (n_hidden, (n_input + 1)))
-# w2 = nn_params.x[(n_hidden * (n_input + 1)):].reshape((n_class, (n_hidden + 1)))
-
+#w1 = nn_params.x[0:n_hidden * (n_input + 1)].reshape( (n_hidden, (n_input + 1)))
+#w2 = nn_params.x[(n_hidden * (n_input + 1)):].reshape((n_class, (n_hidden + 1)))
+#print w1.shape
+#print w2.shape
 
 #Test the computed parameters
 
@@ -325,6 +358,6 @@ print initial_w1.shape
 
 # predicted_label = nnPredict(w1,w2,test_data)
 
-#find the accuracy on Validation Dataset
+#find the accuracy on Test Dataset
 
 # print('\n Test set Accuracy:' + + str(100*np.mean((predicted_label == test_label).astype(float))) + '%')
