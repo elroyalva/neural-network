@@ -123,10 +123,17 @@ def preprocess():
     
 
     combined=np.append(train,vec,axis=1)
+    # print (combined.shape)
     
-    train_comb, valid_comb = train_test_split(combined, test_size = 0.16666)
+    #train_comb, valid_comb = train_test_split(combined, test_size = 0.16666)
     
-  
+    a = range(combined.shape[0])
+    #print (a)
+    aperm = np.random.permutation(a)
+    train_comb = combined[aperm[0:50000],:]
+    valid_comb = combined[aperm[50000:],:]
+    #print (train_comb.shape)
+    #print (valid_comb.shape)
     disint=np.split(train_comb,[784],1)
     train_data=disint[0]
     train_label=disint[1]
@@ -137,7 +144,11 @@ def preprocess():
     test_data = test
     test_label = vectest
 
+    ##print (train_data.shape)
+    #print (train_label.shape)
 
+    # print (validation_data.shape) 
+    # print (validation_label.shape)
     
     #Feature Selection
     variance= np.var(train,0).astype(np.int64)
@@ -331,7 +342,7 @@ args = (n_input, n_hidden, n_class, train_data, train_label, lambdaval)
 opts = {'maxiter' : 50}    # Preferred value.
 #nnPredict(initial_w1,initial_w2,train_data)
 
-nn_params = minimize(nnObjFunction, initialWeights, jac=True, args=args,method='CG', options=opts)
+#nn_params = minimize(nnObjFunction, initialWeights, jac=True, args=args,method='CG', options=opts)
 
 #In Case you want to use fmin_cg, you may have to split the nnObjectFunction to two functions nnObjFunctionVal
 #and nnObjGradient. Check documentation for this function before you proceed.
