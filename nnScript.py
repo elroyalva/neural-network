@@ -29,7 +29,7 @@ def sigmoid(z):
     
     """# Notice that z can be a scalar, a vector or a matrix
     # return the sigmoid of input z"""
-    if type(z)==types.FloatType:
+    if isinstance(z,float):
         z=1/(1+math.exp(-1*z))
         return z
     else:
