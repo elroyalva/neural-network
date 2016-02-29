@@ -121,7 +121,9 @@ def preprocess():
    
     #Randomly split
     
-
+    #print ("printing max")
+    #print (np.max(train,axis=0))
+    #print (np.max(train,axis=1))
     combined=np.append(train,vec,axis=1)
     # print (combined.shape)
     
@@ -137,7 +139,7 @@ def preprocess():
     disint=np.split(train_comb,[784],1)
     train_data=disint[0]
     train_label=disint[1]
-
+    # print (train_label)
     disint=np.split(valid_comb,[784],1)
     validation_data=disint[0]
     validation_label=disint[1]
@@ -151,29 +153,19 @@ def preprocess():
     # print (validation_label.shape)
     
     #Feature Selection
-    # variance = np.var(train,axis=0).astype(np.float64)
-    # print(variance)
-    # featureArray = featureSel(variance, 0.1)
-    # print(featureArray)
-
-    threshold=1.38265757e-05
+    
     variance= np.var(train_data,0).astype(np.float64)[...,None]
 
-    global idx
-    idx = variance[:,0] < threshold
-    variance[idx,0] = 0
-    # print (variance)
-
-    
+   
     return train_data, train_label, validation_data, validation_label, test_data, test_label
-
-
+    
+    
     
 
 def nnObjFunction(params, *args):
     """% nnObjFunction computes the value of objective function (negative log 
     %   likelihood error function with regularization) given the parameters 
-    %   of Neural Networks, the training data, their corresponding training 
+%   of Neural Networks, the training data, their corresponding training 
     %   labels and lambda - regularization hyper-parameter.
 
     % Input:
@@ -209,13 +201,14 @@ def nnObjFunction(params, *args):
     %     layer to unit i in output layer."""
     
     n_input, n_hidden, n_class, training_data, training_label, lambdaval = args
-    # print (training_label)
+    
     w1 = params[0:n_hidden * (n_input + 1)].reshape( (n_hidden, (n_input + 1)))
     w2 = params[(n_hidden * (n_input + 1)):].reshape((n_class, (n_hidden + 1)))
 
 
     
-    #print w1.shape
+    # print ("w1 shape",w1.shape)
+    # print ("w2 shape",w2.shape)
     #print w2.shape
 
     #print training_data.shape
@@ -225,27 +218,98 @@ def nnObjFunction(params, *args):
     w2temp=np.transpose(w2)
 
     temp=np.ones(len(data))[...,None]  #adding 1s to data
-    data=np.append(data,temp,axis=1)
+    x=np.append(data,temp,axis=1)
     #print w1
     
-    a=np.dot(data,w1temp) #getting first sum-product at hidden node
+    a=np.dot(x,w1temp) #getting first sum-product at hidden node
     #print res
     #print res
     z=sigmoid(a)  #applying sigma on every entry
+    
     #print z
     #columns=z.shape[0]
     temp=np.ones(len(z))[...,None]  #adding 1s to hidden node values
     z=np.append(z,temp,axis=1)
-    
+    # print ("z shape",z.shape)
     b=np.dot(z,w2temp) #getting final sum-product at output node
     #print res1
     o=sigmoid(b) #applying sigma on every entry
+    #rint ("o shape",o.shape)
 
-    oneOfK = np.zeros((len(training_label), 10))
-    for label in range(0,len(training_label)):
-        oneOfK[label][math.floor(training_label[label])] = 1
-    obj_val = 0  
+    #print (o.shape)
+    y=label_binarize(training_label, classes=[0,1,2,3,4,5,6,7,8,9])
+
+
+    #rint ("y shape",y.shape)
+
+    onesarray=np.ones(y.shape)
+
+    #print ("onesarray shape", onesarray.shape)
+    obj_val = 0 
+
+    delta1= y-o
+    delta2= onesarray-o
+    delta=delta1*delta2
+    delta=delta*o
+    Jpw2=np.dot(np.transpose(delta),z)
+    Jpw2=-Jpw2
+    Jpw2=Jpw2+ w2*lambdaval
+    grad_w2=Jpw2/len(y)
+    grad_w2=grad_w2[...,None]
+
+    newones=np.ones(z.shape)
+    #print ("newones",newones.shape)
+    delta1=newones-z
+    delta1=delta1*z
+    delta1=-delta1
+    delta2=np.dot(delta,w2)
+    delta=delta1*delta2
+    #print (delta.shape[1])
+    delta=np.delete(delta,delta.shape[1]-1,1)
+    #print ("delta shape", delta.shape)
+    Jpw1=np.dot(np.transpose(delta),x)
+    Jpw1=Jpw1+lambdaval*w1
     
+
+    grad_w1=Jpw1/len(y)
+    
+    #print (Jpw1.shape)
+
+
+    sca1=(y-o)*(y-o)
+    sca2=np.sum(sca1,axis=1)[...,None]
+    sca2=sca2/2
+    sca3=np.sum(sca2,axis=0)[...,None]
+    scalar1=np.asscalar(sca3)/50000
+    # print ("scal shape",sca3.shape)
+    # print (scalar1)
+
+    sca1=w1*w1
+    # print ("sca1 shape", sca1.shape)
+    sca2=np.sum(sca1,axis=1)[...,None]
+    # print ("sca2 shape", sca2.shape)
+    sca3=np.sum(sca2,axis=0)[...,None]
+    scalar2=np.asscalar(sca3)
+    # print (scalar2)
+    # print (sca3.shape)
+
+    sca1=w2*w2
+    # print ("sca1 shape", sca1.shape)
+    sca2=np.sum(sca1,axis=1)[...,None]
+    # print ("sca2 shape", sca2.shape)
+    sca3=np.sum(sca2,axis=0)[...,None]
+    scalar3=np.asscalar(sca3)
+    # print (scalar3)
+
+    scasum=scalar2+scalar3
+    scasum=lambdaval*scasum
+    # print (len(y))
+    scasum=scasum/(2*len(y))
+
+    scalar=scalar1+scasum
+    obj_val=scalar
+    # print (obj_val)
+    # print (grad_w1)
     #Your code here
     #
     #
@@ -253,12 +317,21 @@ def nnObjFunction(params, *args):
     #
     #
     
-    
-    
+    # print (grad_w1.shape)
+    # print (grad_w2.shape)  
+
+    print ("In nnObjFunction")
+    gr1=grad_w1.flatten()
+    gr2=grad_w2.flatten()
+    gr1=gr1[...,None]
+    gr2=gr2[...,None]
+    # print ("falt shape", gr1.shape)
     #Make sure you reshape the gradient matrices to a 1D array. for instance if your gradient matrices are grad_w1 and grad_w2
     #you would use code similar to the one below to create a flat array
-    #obj_grad = np.concatenate((grad_w1.flatten(), grad_w2.flatten()),0)
-    obj_grad = np.array([])
+    obj_grad = np.concatenate((grad_w1.flatten(), grad_w2.flatten()),0)
+    #obj_grad = np.array([])
+
+    # print (obj_grad.shape)
     
     return (obj_val,obj_grad)
 
@@ -290,10 +363,10 @@ def nnPredict(w1,w2,data):
     
     #print w1.shape
     temp=np.ones(len(data))[...,None]  #adding 1s to data
-    data=np.append(data,temp,axis=1)
+    x=np.append(data,temp,axis=1)
     #print w1
     w1t=np.transpose(w1)
-    a=np.dot(data,w1t) #getting first sum-product at hidden node
+    a=np.dot(x,w1t) #getting first sum-product at hidden node
     #print res
     #print res
     z=sigmoid(a)  #applying sigma on every entry
@@ -307,7 +380,12 @@ def nnPredict(w1,w2,data):
     o=sigmoid(b) #applying sigma on every entry
     #print l
     #print l
-    labels = np.amax(o, axis=1)[...,None] # using maximum out of all output values
+    labels=np.argmax(o,axis=1)
+    lene=len(labels)
+    labels=np.asarray(labels)
+    labels=np.reshape(labels,(-1,lene))
+    labels=np.transpose(labels)
+    # labels = np.amax(o, axis=1)[...,None] # using maximum out of all output values
 
     #print (labels.shape)
     
@@ -343,7 +421,7 @@ initial_w2 = initializeWeights(n_hidden, n_class);
 initialWeights = np.concatenate((initial_w1.flatten(), initial_w2.flatten()),0)
 
 # set the regularization hyper-parameter
-lambdaval = 0;
+lambdaval = 2;
 
 
 args = (n_input, n_hidden, n_class, train_data, train_label, lambdaval)
@@ -352,8 +430,11 @@ args = (n_input, n_hidden, n_class, train_data, train_label, lambdaval)
 
 opts = {'maxiter' : 50}    # Preferred value.
 #nnPredict(initial_w1,initial_w2,train_data)
-
+# try:
 nn_params = minimize(nnObjFunction, initialWeights, jac=True, args=args,method='CG', options=opts)
+# except ValueError:  #raised if `y` is empty.
+    # pass
+
 
 #In Case you want to use fmin_cg, you may have to split the nnObjectFunction to two functions nnObjFunctionVal
 #and nnObjGradient. Check documentation for this function before you proceed.
@@ -361,28 +442,30 @@ nn_params = minimize(nnObjFunction, initialWeights, jac=True, args=args,method='
 
 
 #Reshape nnParams from 1D vector into w1 and w2 matrices
-#w1 = nn_params.x[0:n_hidden * (n_input + 1)].reshape( (n_hidden, (n_input + 1)))
-#w2 = nn_params.x[(n_hidden * (n_input + 1)):].reshape((n_class, (n_hidden + 1)))
+w1 = nn_params.x[0:n_hidden * (n_input + 1)].reshape( (n_hidden, (n_input + 1)))
+w2 = nn_params.x[(n_hidden * (n_input + 1)):].reshape((n_class, (n_hidden + 1)))
 #print w1.shape
 #print w2.shape
 
 #Test the computed parameters
 
-# predicted_label = nnPredict(w1,w2,train_data)
+predicted_label = nnPredict(w1,w2,train_data)
+print (predicted_label)
+print (train_label)
 
 #find the accuracy on Training Dataset
 
-# print('\n Training set Accuracy:' + str(100*np.mean((predicted_label == train_label).astype(float))) + '%')
+print('\n Training set Accuracy:' + str(100*np.mean((predicted_label == train_label).astype(float))) + '%')
 
-# predicted_label = nnPredict(w1,w2,validation_data)
+predicted_label = nnPredict(w1,w2,validation_data)
 
 #find the accuracy on Validation Dataset
 
-# print('\n Validation set Accuracy:' + str(100*np.mean((predicted_label == validation_label).astype(float))) + '%')
+print('\n Validation set Accuracy:' + str(100*np.mean((predicted_label == validation_label).astype(float))) + '%')
 
 
-# predicted_label = nnPredict(w1,w2,test_data)
+predicted_label = nnPredict(w1,w2,test_data)
 
 #find the accuracy on Test Dataset
 
-# print('\n Test set Accuracy:' + + str(100*np.mean((predicted_label == test_label).astype(float))) + '%')
+print('\n Test set Accuracy:' +  str(100*np.mean((predicted_label == test_label).astype(float))) + '%')
