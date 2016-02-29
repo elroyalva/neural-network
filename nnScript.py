@@ -130,14 +130,31 @@ def preprocess():
     test_data = test
     test_label = vectest
 
-    threshold=1.38265757e-05
+    threshold=0
     variance= np.var(train_data,0).astype(np.float64)[...,None]
-
+    print ("len of variance", len(variance))
+    # print(variance)
     global idx
-    idx = variance[:,0] < threshold
-    variance[idx,0] = 0
-    # print (variance)
+    idx = variance[:,0] > threshold
+    # print (idx)
+    # variance[idx,0] = 0
+    print (np.bincount(idx)[0])
+    reqdCols = np.zeros(np.bincount(idx)[0])[...,None]
+    # reqdCols = np.empty([1])
+    counter2=0
 
+    for count in range (0, len(variance)):
+        # print(variance[count])
+        if(variance[count]<= 0):
+            # print(variance[count])
+            # print(threshold)
+            reqdCols[counter2,0] = count
+            counter2 = counter2 + 1
+    # print (reqdCols)
+
+    train_data = np.delete(train_data, reqdCols,1)
+    validation_data = np.delete(validation_data,reqdCols, 1)
+    test_data = np.delete(test_data, reqdCols, 1)
    
     return train_data, train_label, validation_data, validation_label, test_data, test_label
     
