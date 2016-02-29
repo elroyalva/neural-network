@@ -4,8 +4,6 @@ from scipy.io import loadmat
 from math import sqrt
 import types
 import math
-from sklearn.cross_validation import train_test_split
-from sklearn.preprocessing import label_binarize
 
 def initializeWeights(n_in,n_out):
     """
@@ -335,7 +333,7 @@ n_input = train_data.shape[1];
 
 
 # set the number of nodes in hidden unit (not including bias unit)
-n_hidden = 20;
+n_hidden = 30;
 # set the regularization hyper-parameter
 lambdaval = 2;
 n_class = 10;                  
