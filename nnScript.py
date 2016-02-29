@@ -165,7 +165,6 @@ def preprocess():
     # print (variance)
 
     
-    
     return train_data, train_label, validation_data, validation_label, test_data, test_label
 
 
@@ -308,7 +307,8 @@ def nnPredict(w1,w2,data):
     o=sigmoid(b) #applying sigma on every entry
     #print l
     #print l
-    labels = np.amax(o, axis=1) # using maximum out of all output values
+    labels = np.amax(o, axis=1)[...,None] # using maximum out of all output values
+
     #print (labels.shape)
     
     return labels
