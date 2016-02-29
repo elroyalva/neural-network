@@ -142,7 +142,7 @@ def preprocess():
     # print (train_label)
     disint=np.split(valid_comb,[784],1)
     validation_data=disint[0]
-    validation_label=disint[1]
+    validation_label=disint[1]  
     test_data = test
     test_label = vectest
 
@@ -154,7 +154,18 @@ def preprocess():
     
     #Feature Selection
     
+     # variance = np.var(train,axis=0).astype(np.float64)
+    # print(variance)
+    # featureArray = featureSel(variance, 0.1)
+    # print(featureArray)
+
+    threshold=1.38265757e-05
     variance= np.var(train_data,0).astype(np.float64)[...,None]
+
+    global idx
+    idx = variance[:,0] < threshold
+    variance[idx,0] = 0
+    # print (variance)
 
    
     return train_data, train_label, validation_data, validation_label, test_data, test_label
@@ -237,9 +248,12 @@ def nnObjFunction(params, *args):
     #rint ("o shape",o.shape)
 
     #print (o.shape)
-    y=label_binarize(training_label, classes=[0,1,2,3,4,5,6,7,8,9])
+    # y=label_binarize(training_label, classes=[0,1,2,3,4,5,6,7,8,9])
+    oneOfK = np.zeros((len(training_label), 10))
+    for label in range(0,len(training_label)):
+        oneOfK[label][math.floor(training_label[label])] = 1
 
-
+    y=oneOfK
     #rint ("y shape",y.shape)
 
     onesarray=np.ones(y.shape)
