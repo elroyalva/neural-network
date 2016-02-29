@@ -73,8 +73,6 @@ def preprocess():
    
     #Creating train data
     train= mat.get('train0')
-    
-    
     vec=np.zeros(len(train))[...,None]
     #print vec.shape
     for i in range(1,10):
@@ -86,8 +84,6 @@ def preprocess():
         vec=np.append(vec,vect,axis=0)
 
     vec=vec.astype(np.int64)
-    #print vec
-    #Test data
     test= mat.get('test0')
     vectest=np.zeros(len(test))[...,None]
   
@@ -120,44 +116,19 @@ def preprocess():
     
    
     #Randomly split
-    
-    #print ("printing max")
-    #print (np.max(train,axis=0))
-    #print (np.max(train,axis=1))
     combined=np.append(train,vec,axis=1)
-    # print (combined.shape)
-    
-    #train_comb, valid_comb = train_test_split(combined, test_size = 0.16666)
-    
     a = range(combined.shape[0])
-    #print (a)
     aperm = np.random.permutation(a)
     train_comb = combined[aperm[0:50000],:]
     valid_comb = combined[aperm[50000:],:]
-    #print (train_comb.shape)
-    #print (valid_comb.shape)
     disint=np.split(train_comb,[784],1)
     train_data=disint[0]
     train_label=disint[1]
-    # print (train_label)
     disint=np.split(valid_comb,[784],1)
     validation_data=disint[0]
     validation_label=disint[1]  
     test_data = test
     test_label = vectest
-
-    ##print (train_data.shape)
-    #print (train_label.shape)
-
-    # print (validation_data.shape) 
-    # print (validation_label.shape)
-    
-    #Feature Selection
-    
-     # variance = np.var(train,axis=0).astype(np.float64)
-    # print(variance)
-    # featureArray = featureSel(variance, 0.1)
-    # print(featureArray)
 
     threshold=1.38265757e-05
     variance= np.var(train_data,0).astype(np.float64)[...,None]
@@ -216,49 +187,25 @@ def nnObjFunction(params, *args):
     w1 = params[0:n_hidden * (n_input + 1)].reshape( (n_hidden, (n_input + 1)))
     w2 = params[(n_hidden * (n_input + 1)):].reshape((n_class, (n_hidden + 1)))
 
-
-    
-    # print ("w1 shape",w1.shape)
-    # print ("w2 shape",w2.shape)
-    #print w2.shape
-
-    #print training_data.shape
-    #ACTUALLY NEED THE EXACT BVALUES HERE; INSTEAD OF THE THRESHOLDED. SO WRITE THE METHOD HERE AGAIN OR WRITE A NEW METHOD
     data=(training_data)
     w1temp=np.transpose(w1)
     w2temp=np.transpose(w2)
 
     temp=np.ones(len(data))[...,None]  #adding 1s to data
     x=np.append(data,temp,axis=1)
-    #print w1
-    
     a=np.dot(x,w1temp) #getting first sum-product at hidden node
-    #print res
-    #print res
     z=sigmoid(a)  #applying sigma on every entry
-    
-    #print z
-    #columns=z.shape[0]
     temp=np.ones(len(z))[...,None]  #adding 1s to hidden node values
     z=np.append(z,temp,axis=1)
-    # print ("z shape",z.shape)
     b=np.dot(z,w2temp) #getting final sum-product at output node
-    #print res1
     o=sigmoid(b) #applying sigma on every entry
-    #rint ("o shape",o.shape)
-
-    #print (o.shape)
-    # y=label_binarize(training_label, classes=[0,1,2,3,4,5,6,7,8,9])
+    
     oneOfK = np.zeros((len(training_label), 10))
     for label in range(0,len(training_label)):
         oneOfK[label][math.floor(training_label[label])] = 1
 
     y=oneOfK
-    #rint ("y shape",y.shape)
-
     onesarray=np.ones(y.shape)
-
-    #print ("onesarray shape", onesarray.shape)
     obj_val = 0 
 
     delta1= y-o
@@ -272,80 +219,45 @@ def nnObjFunction(params, *args):
     grad_w2=grad_w2[...,None]
 
     newones=np.ones(z.shape)
-    #print ("newones",newones.shape)
     delta1=newones-z
     delta1=delta1*z
     delta1=-delta1
     delta2=np.dot(delta,w2)
     delta=delta1*delta2
-    #print (delta.shape[1])
     delta=np.delete(delta,delta.shape[1]-1,1)
-    #print ("delta shape", delta.shape)
     Jpw1=np.dot(np.transpose(delta),x)
     Jpw1=Jpw1+lambdaval*w1
-    
-
     grad_w1=Jpw1/len(y)
-    
-    #print (Jpw1.shape)
-
 
     sca1=(y-o)*(y-o)
     sca2=np.sum(sca1,axis=1)[...,None]
     sca2=sca2/2
     sca3=np.sum(sca2,axis=0)[...,None]
     scalar1=np.asscalar(sca3)/50000
-    # print ("scal shape",sca3.shape)
-    # print (scalar1)
-
+    
     sca1=w1*w1
-    # print ("sca1 shape", sca1.shape)
     sca2=np.sum(sca1,axis=1)[...,None]
-    # print ("sca2 shape", sca2.shape)
     sca3=np.sum(sca2,axis=0)[...,None]
     scalar2=np.asscalar(sca3)
-    # print (scalar2)
-    # print (sca3.shape)
-
+   
     sca1=w2*w2
-    # print ("sca1 shape", sca1.shape)
     sca2=np.sum(sca1,axis=1)[...,None]
-    # print ("sca2 shape", sca2.shape)
     sca3=np.sum(sca2,axis=0)[...,None]
     scalar3=np.asscalar(sca3)
-    # print (scalar3)
 
     scasum=scalar2+scalar3
     scasum=lambdaval*scasum
-    # print (len(y))
     scasum=scasum/(2*len(y))
 
     scalar=scalar1+scasum
     obj_val=scalar
-    # print (obj_val)
-    # print (grad_w1)
-    #Your code here
-    #
-    #
-    #
-    #
-    #
     
-    # print (grad_w1.shape)
-    # print (grad_w2.shape)  
-
-    print ("In nnObjFunction")
     gr1=grad_w1.flatten()
     gr2=grad_w2.flatten()
     gr1=gr1[...,None]
     gr2=gr2[...,None]
-    # print ("falt shape", gr1.shape)
-    #Make sure you reshape the gradient matrices to a 1D array. for instance if your gradient matrices are grad_w1 and grad_w2
-    #you would use code similar to the one below to create a flat array
+    
     obj_grad = np.concatenate((grad_w1.flatten(), grad_w2.flatten()),0)
-    #obj_grad = np.array([])
-
-    # print (obj_grad.shape)
     
     return (obj_val,obj_grad)
 
@@ -369,23 +281,11 @@ def nnPredict(w1,w2,data):
     % Output: 
     % label: a column vector of predicted labels""" 
     
-    #data=np.array([[1,2,3],[3,2,3],[2,3,4]]) #data=3 training with 4 attributes each
-
-
-    #w1=np.array([[0.1,0.2,0.1,0.2],[0.2,0.3,0.1,0.3]]) #two hidden nodes so two rows
-    #w2=np.array([[0.1,0.1,0.2],[0.2,0.2,0.2],[0.1,0.2,0.3],[0.2,0.1,0.2]]) #4 output nodes so 4 rows
-    
-    #print w1.shape
     temp=np.ones(len(data))[...,None]  #adding 1s to data
     x=np.append(data,temp,axis=1)
-    #print w1
     w1t=np.transpose(w1)
     a=np.dot(x,w1t) #getting first sum-product at hidden node
-    #print res
-    #print res
     z=sigmoid(a)  #applying sigma on every entry
-    #print z
-    #columns=z.shape[0]
     temp=np.ones(len(z))[...,None]  #adding 1s to hidden node values
     z=np.append(z,temp,axis=1)
     w2t=np.transpose(w2)
@@ -399,9 +299,6 @@ def nnPredict(w1,w2,data):
     labels=np.asarray(labels)
     labels=np.reshape(labels,(-1,lene))
     labels=np.transpose(labels)
-    # labels = np.amax(o, axis=1)[...,None] # using maximum out of all output values
-
-    #print (labels.shape)
     
     return labels
     
@@ -418,68 +315,48 @@ train_data, train_label, validation_data,validation_label, test_data, test_label
 # set the number of nodes in input unit (not including bias unit)
 n_input = train_data.shape[1]; 
 
-# set the number of nodes in hidden unit (not including bias unit)
-n_hidden = 50;
-				   
-# set the number of nodes in output unit
-n_class = 10;				   
 
-# initialize the weights into some random matrices
+
+# set the number of nodes in hidden unit (not including bias unit)
+n_hidden = 20;
+# set the regularization hyper-parameter
+lambdaval = 2;
+n_class = 10;                  
+
 initial_w1 = initializeWeights(n_input, n_hidden);
 initial_w2 = initializeWeights(n_hidden, n_class);
 
-
-# WE NEED FLOAT WEIGHTS!
-
-# unroll 2 weight matrices into single column vector
 initialWeights = np.concatenate((initial_w1.flatten(), initial_w2.flatten()),0)
 
-# set the regularization hyper-parameter
-lambdaval = 2;
-
-
-args = (n_input, n_hidden, n_class, train_data, train_label, lambdaval)
-
-#Train Neural Network using fmin_cg or minimize from scipy,optimize module. Check documentation for a working example
 
 opts = {'maxiter' : 50}    # Preferred value.
-#nnPredict(initial_w1,initial_w2,train_data)
-# try:
-nn_params = minimize(nnObjFunction, initialWeights, jac=True, args=args,method='CG', options=opts)
-# except ValueError:  #raised if `y` is empty.
-    # pass
+# while n_hidden<51:
+lambdaval=0
+while lambdaval<1.1:
+        # set the number of nodes in output unit
+    print (n_hidden)
+    print (lambdaval)
+    args = (n_input, n_hidden, n_class, train_data, train_label, lambdaval)
+    nn_params = minimize(nnObjFunction, initialWeights, jac=True, args=args,method='CG', options=opts)
+
+    w1 = nn_params.x[0:n_hidden * (n_input + 1)].reshape( (n_hidden, (n_input + 1)))
+    w2 = nn_params.x[(n_hidden * (n_input + 1)):].reshape((n_class, (n_hidden + 1)))
 
 
-#In Case you want to use fmin_cg, you may have to split the nnObjectFunction to two functions nnObjFunctionVal
-#and nnObjGradient. Check documentation for this function before you proceed.
-#nn_params, cost = fmin_cg(nnObjFunctionVal, initialWeights, nnObjGradient,args = args, maxiter = 50)
+    predicted_label = nnPredict(w1,w2,train_data)
+        
+    print('\n Training set Accuracy for n_hidden= '+str(n_hidden)+' and lambdaval= '+str(lambdaval)+' is ' + str(100*np.mean((predicted_label == train_label).astype(float))) + '%')
+
+    predicted_label = nnPredict(w1,w2,validation_data)
+
+    print('\n Validation set Accuracy for n_hidden= ' +str(n_hidden)+' and lambdaval= '+str(lambdaval)+' is '+ str(100*np.mean((predicted_label == validation_label).astype(float))) + '%')
 
 
-#Reshape nnParams from 1D vector into w1 and w2 matrices
-w1 = nn_params.x[0:n_hidden * (n_input + 1)].reshape( (n_hidden, (n_input + 1)))
-w2 = nn_params.x[(n_hidden * (n_input + 1)):].reshape((n_class, (n_hidden + 1)))
-#print w1.shape
-#print w2.shape
+    predicted_label = nnPredict(w1,w2,test_data)
 
-#Test the computed parameters
+    print('\n Test set Accuracy for n_hidden=' +str(n_hidden)+' and lambdaval= '+str(lambdaval)+' is '+   str(100*np.mean((predicted_label == test_label).astype(float))) + '%')
 
-predicted_label = nnPredict(w1,w2,train_data)
-print (predicted_label)
-print (train_label)
-
-#find the accuracy on Training Dataset
-
-print('\n Training set Accuracy:' + str(100*np.mean((predicted_label == train_label).astype(float))) + '%')
-
-predicted_label = nnPredict(w1,w2,validation_data)
-
-#find the accuracy on Validation Dataset
-
-print('\n Validation set Accuracy:' + str(100*np.mean((predicted_label == validation_label).astype(float))) + '%')
-
-
-predicted_label = nnPredict(w1,w2,test_data)
-
-#find the accuracy on Test Dataset
-
-print('\n Test set Accuracy:' +  str(100*np.mean((predicted_label == test_label).astype(float))) + '%')
+    lambdaval=lambdaval+0.2
+    # n_hidden=n_hidden+5
+    
+				   
