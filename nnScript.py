@@ -151,13 +151,24 @@ def preprocess():
     # print (validation_label.shape)
     
     #Feature Selection
-    variance= np.var(train,0).astype(np.int64)
+    # variance = np.var(train,axis=0).astype(np.float64)
+    # print(variance)
+    # featureArray = featureSel(variance, 0.1)
+    # print(featureArray)
+
+    threshold=1.38265757e-05
+    variance= np.var(train_data,0).astype(np.float64)[...,None]
+
+    global idx
+    idx = variance[:,0] < threshold
+    variance[idx,0] = 0
+    # print (variance)
 
     
     
     return train_data, train_label, validation_data, validation_label, test_data, test_label
-    
-    
+
+
     
 
 def nnObjFunction(params, *args):
@@ -199,7 +210,7 @@ def nnObjFunction(params, *args):
     %     layer to unit i in output layer."""
     
     n_input, n_hidden, n_class, training_data, training_label, lambdaval = args
-    
+    # print (training_label)
     w1 = params[0:n_hidden * (n_input + 1)].reshape( (n_hidden, (n_input + 1)))
     w2 = params[(n_hidden * (n_input + 1)):].reshape((n_class, (n_hidden + 1)))
 
@@ -231,9 +242,9 @@ def nnObjFunction(params, *args):
     #print res1
     o=sigmoid(b) #applying sigma on every entry
 
-    print (o.shape)
-    oneOfK=label_binarize(training_label, classes=[0,1,2,3,4,5,6,7,8,9])
-    print (oneOfK.shape)
+    oneOfK = np.zeros((len(training_label), 10))
+    for label in range(0,len(training_label)):
+        oneOfK[label][math.floor(training_label[label])] = 1
     obj_val = 0  
     
     #Your code here
@@ -342,7 +353,7 @@ args = (n_input, n_hidden, n_class, train_data, train_label, lambdaval)
 opts = {'maxiter' : 50}    # Preferred value.
 #nnPredict(initial_w1,initial_w2,train_data)
 
-#nn_params = minimize(nnObjFunction, initialWeights, jac=True, args=args,method='CG', options=opts)
+nn_params = minimize(nnObjFunction, initialWeights, jac=True, args=args,method='CG', options=opts)
 
 #In Case you want to use fmin_cg, you may have to split the nnObjectFunction to two functions nnObjFunctionVal
 #and nnObjGradient. Check documentation for this function before you proceed.
