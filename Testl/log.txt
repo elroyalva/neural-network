@@ -1,0 +1,542 @@
+len of variance 784
+69
+10
+0
+
+ Training set Accuracy for n_hidden= 10 and lambdaval= 0 is 91.644%
+
+ Validation set Accuracy for n_hidden= 10 and lambdaval= 0 is 90.98%
+
+ Test set Accuracy for n_hidden=10 and lambdaval= 0 is 91.4%
+
+ Complexity for n_hidden=10 and lambdaval= 0 is 944.755423254
+10
+0.2
+
+ Training set Accuracy for n_hidden= 10 and lambdaval= 0.2 is 91.664%
+
+ Validation set Accuracy for n_hidden= 10 and lambdaval= 0.2 is 91.09%
+
+ Test set Accuracy for n_hidden=10 and lambdaval= 0.2 is 91.57%
+
+ Complexity for n_hidden=10 and lambdaval= 0.2 is 925.515457454
+10
+0.4
+
+ Training set Accuracy for n_hidden= 10 and lambdaval= 0.4 is 91.46%
+
+ Validation set Accuracy for n_hidden= 10 and lambdaval= 0.4 is 90.85%
+
+ Test set Accuracy for n_hidden=10 and lambdaval= 0.4 is 91.41%
+
+ Complexity for n_hidden=10 and lambdaval= 0.4 is 879.35554812
+10
+0.6000000000000001
+
+ Training set Accuracy for n_hidden= 10 and lambdaval= 0.6000000000000001 is 91.67%
+
+ Validation set Accuracy for n_hidden= 10 and lambdaval= 0.6000000000000001 is 91.19%
+
+ Test set Accuracy for n_hidden=10 and lambdaval= 0.6000000000000001 is 91.57%
+
+ Complexity for n_hidden=10 and lambdaval= 0.6000000000000001 is 865.295331979
+10
+0.8
+
+ Training set Accuracy for n_hidden= 10 and lambdaval= 0.8 is 91.52%
+
+ Validation set Accuracy for n_hidden= 10 and lambdaval= 0.8 is 91.14%
+
+ Test set Accuracy for n_hidden=10 and lambdaval= 0.8 is 91.57%
+
+ Complexity for n_hidden=10 and lambdaval= 0.8 is 791.038454536
+10
+1.0
+
+ Training set Accuracy for n_hidden= 10 and lambdaval= 1.0 is 91.564%
+
+ Validation set Accuracy for n_hidden= 10 and lambdaval= 1.0 is 91.2%
+
+ Test set Accuracy for n_hidden=10 and lambdaval= 1.0 is 91.62%
+
+ Complexity for n_hidden=10 and lambdaval= 1.0 is 888.704799712
+15
+0
+
+ Training set Accuracy for n_hidden= 15 and lambdaval= 0 is 92.618%
+
+ Validation set Accuracy for n_hidden= 15 and lambdaval= 0 is 92.3%
+
+ Test set Accuracy for n_hidden=15 and lambdaval= 0 is 92.32%
+
+ Complexity for n_hidden=15 and lambdaval= 0 is 884.415851165
+15
+0.2
+
+ Training set Accuracy for n_hidden= 15 and lambdaval= 0.2 is 92.378%
+
+ Validation set Accuracy for n_hidden= 15 and lambdaval= 0.2 is 92.19%
+
+ Test set Accuracy for n_hidden=15 and lambdaval= 0.2 is 92.12%
+
+ Complexity for n_hidden=15 and lambdaval= 0.2 is 780.361333221
+15
+0.4
+
+ Training set Accuracy for n_hidden= 15 and lambdaval= 0.4 is 92.49%
+
+ Validation set Accuracy for n_hidden= 15 and lambdaval= 0.4 is 92.15%
+
+ Test set Accuracy for n_hidden=15 and lambdaval= 0.4 is 92.22%
+
+ Complexity for n_hidden=15 and lambdaval= 0.4 is 787.665299728
+15
+0.6000000000000001
+
+ Training set Accuracy for n_hidden= 15 and lambdaval= 0.6000000000000001 is 92.572%
+
+ Validation set Accuracy for n_hidden= 15 and lambdaval= 0.6000000000000001 is 92.16%
+
+ Test set Accuracy for n_hidden=15 and lambdaval= 0.6000000000000001 is 92.25%
+
+ Complexity for n_hidden=15 and lambdaval= 0.6000000000000001 is 787.808720936
+15
+0.8
+
+ Training set Accuracy for n_hidden= 15 and lambdaval= 0.8 is 92.304%
+
+ Validation set Accuracy for n_hidden= 15 and lambdaval= 0.8 is 92.31%
+
+ Test set Accuracy for n_hidden=15 and lambdaval= 0.8 is 92.12%
+
+ Complexity for n_hidden=15 and lambdaval= 0.8 is 742.857027652
+15
+1.0
+
+ Training set Accuracy for n_hidden= 15 and lambdaval= 1.0 is 92.27%
+
+ Validation set Accuracy for n_hidden= 15 and lambdaval= 1.0 is 92.17%
+
+ Test set Accuracy for n_hidden=15 and lambdaval= 1.0 is 92.04%
+
+ Complexity for n_hidden=15 and lambdaval= 1.0 is 742.194256743
+20
+0
+
+ Training set Accuracy for n_hidden= 20 and lambdaval= 0 is 93.122%
+
+ Validation set Accuracy for n_hidden= 20 and lambdaval= 0 is 92.75%
+
+ Test set Accuracy for n_hidden=20 and lambdaval= 0 is 93.09%
+
+ Complexity for n_hidden=20 and lambdaval= 0 is 837.902333052
+20
+0.2
+
+ Training set Accuracy for n_hidden= 20 and lambdaval= 0.2 is 93.162%
+
+ Validation set Accuracy for n_hidden= 20 and lambdaval= 0.2 is 92.82%
+
+ Test set Accuracy for n_hidden=20 and lambdaval= 0.2 is 93.05%
+
+ Complexity for n_hidden=20 and lambdaval= 0.2 is 832.04039353
+20
+0.4
+
+ Training set Accuracy for n_hidden= 20 and lambdaval= 0.4 is 93.156%
+
+ Validation set Accuracy for n_hidden= 20 and lambdaval= 0.4 is 92.84%
+
+ Test set Accuracy for n_hidden=20 and lambdaval= 0.4 is 93.07%
+
+ Complexity for n_hidden=20 and lambdaval= 0.4 is 811.608836375
+20
+0.6000000000000001
+
+ Training set Accuracy for n_hidden= 20 and lambdaval= 0.6000000000000001 is 92.838%
+
+ Validation set Accuracy for n_hidden= 20 and lambdaval= 0.6000000000000001 is 92.57%
+
+ Test set Accuracy for n_hidden=20 and lambdaval= 0.6000000000000001 is 92.83%
+
+ Complexity for n_hidden=20 and lambdaval= 0.6000000000000001 is 720.737080635
+20
+0.8
+
+ Training set Accuracy for n_hidden= 20 and lambdaval= 0.8 is 93.19%
+
+ Validation set Accuracy for n_hidden= 20 and lambdaval= 0.8 is 92.91%
+
+ Test set Accuracy for n_hidden=20 and lambdaval= 0.8 is 93.15%
+
+ Complexity for n_hidden=20 and lambdaval= 0.8 is 757.219941234
+20
+1.0
+
+ Training set Accuracy for n_hidden= 20 and lambdaval= 1.0 is 93.08%
+
+ Validation set Accuracy for n_hidden= 20 and lambdaval= 1.0 is 92.83%
+
+ Test set Accuracy for n_hidden=20 and lambdaval= 1.0 is 93.12%
+
+ Complexity for n_hidden=20 and lambdaval= 1.0 is 734.067273985
+25
+0
+
+ Training set Accuracy for n_hidden= 25 and lambdaval= 0 is 92.302%
+
+ Validation set Accuracy for n_hidden= 25 and lambdaval= 0 is 92.06%
+
+ Test set Accuracy for n_hidden=25 and lambdaval= 0 is 92.34%
+
+ Complexity for n_hidden=25 and lambdaval= 0 is 727.115832529
+25
+0.2
+
+ Training set Accuracy for n_hidden= 25 and lambdaval= 0.2 is 93.54%
+
+ Validation set Accuracy for n_hidden= 25 and lambdaval= 0.2 is 93.27%
+
+ Test set Accuracy for n_hidden=25 and lambdaval= 0.2 is 93.3%
+
+ Complexity for n_hidden=25 and lambdaval= 0.2 is 856.22216211
+25
+0.4
+
+ Training set Accuracy for n_hidden= 25 and lambdaval= 0.4 is 93.692%
+
+ Validation set Accuracy for n_hidden= 25 and lambdaval= 0.4 is 93.13%
+
+ Test set Accuracy for n_hidden=25 and lambdaval= 0.4 is 93.5%
+
+ Complexity for n_hidden=25 and lambdaval= 0.4 is 847.283298504
+25
+0.6000000000000001
+
+ Training set Accuracy for n_hidden= 25 and lambdaval= 0.6000000000000001 is 93.564%
+
+ Validation set Accuracy for n_hidden= 25 and lambdaval= 0.6000000000000001 is 93.0%
+
+ Test set Accuracy for n_hidden=25 and lambdaval= 0.6000000000000001 is 93.39%
+
+ Complexity for n_hidden=25 and lambdaval= 0.6000000000000001 is 817.617748129
+25
+0.8
+
+ Training set Accuracy for n_hidden= 25 and lambdaval= 0.8 is 93.236%
+
+ Validation set Accuracy for n_hidden= 25 and lambdaval= 0.8 is 92.85%
+
+ Test set Accuracy for n_hidden=25 and lambdaval= 0.8 is 93.11%
+
+ Complexity for n_hidden=25 and lambdaval= 0.8 is 776.128547898
+25
+1.0
+
+ Training set Accuracy for n_hidden= 25 and lambdaval= 1.0 is 93.832%
+
+ Validation set Accuracy for n_hidden= 25 and lambdaval= 1.0 is 93.39%
+
+ Test set Accuracy for n_hidden=25 and lambdaval= 1.0 is 93.62%
+
+ Complexity for n_hidden=25 and lambdaval= 1.0 is 817.679701677
+30
+0
+
+ Training set Accuracy for n_hidden= 30 and lambdaval= 0 is 94.014%
+
+ Validation set Accuracy for n_hidden= 30 and lambdaval= 0 is 93.54%
+
+ Test set Accuracy for n_hidden=30 and lambdaval= 0 is 93.98%
+
+ Complexity for n_hidden=30 and lambdaval= 0 is 961.860158151
+30
+0.2
+
+ Training set Accuracy for n_hidden= 30 and lambdaval= 0.2 is 93.738%
+
+ Validation set Accuracy for n_hidden= 30 and lambdaval= 0.2 is 93.26%
+
+ Test set Accuracy for n_hidden=30 and lambdaval= 0.2 is 93.65%
+
+ Complexity for n_hidden=30 and lambdaval= 0.2 is 884.884796111
+30
+0.4
+
+ Training set Accuracy for n_hidden= 30 and lambdaval= 0.4 is 93.994%
+
+ Validation set Accuracy for n_hidden= 30 and lambdaval= 0.4 is 93.55%
+
+ Test set Accuracy for n_hidden=30 and lambdaval= 0.4 is 93.9%
+
+ Complexity for n_hidden=30 and lambdaval= 0.4 is 892.168562808
+30
+0.6000000000000001
+
+ Training set Accuracy for n_hidden= 30 and lambdaval= 0.6000000000000001 is 93.78%
+
+ Validation set Accuracy for n_hidden= 30 and lambdaval= 0.6000000000000001 is 93.36%
+
+ Test set Accuracy for n_hidden=30 and lambdaval= 0.6000000000000001 is 93.72%
+
+ Complexity for n_hidden=30 and lambdaval= 0.6000000000000001 is 814.160573027
+30
+0.8
+
+ Training set Accuracy for n_hidden= 30 and lambdaval= 0.8 is 93.744%
+
+ Validation set Accuracy for n_hidden= 30 and lambdaval= 0.8 is 93.38%
+
+ Test set Accuracy for n_hidden=30 and lambdaval= 0.8 is 93.72%
+
+ Complexity for n_hidden=30 and lambdaval= 0.8 is 820.266214476
+30
+1.0
+
+ Training set Accuracy for n_hidden= 30 and lambdaval= 1.0 is 93.472%
+
+ Validation set Accuracy for n_hidden= 30 and lambdaval= 1.0 is 93.16%
+
+ Test set Accuracy for n_hidden=30 and lambdaval= 1.0 is 93.39%
+
+ Complexity for n_hidden=30 and lambdaval= 1.0 is 755.214438512
+35
+0
+
+ Training set Accuracy for n_hidden= 35 and lambdaval= 0 is 94.136%
+
+ Validation set Accuracy for n_hidden= 35 and lambdaval= 0 is 93.8%
+
+ Test set Accuracy for n_hidden=35 and lambdaval= 0 is 93.92%
+
+ Complexity for n_hidden=35 and lambdaval= 0 is 878.286810309
+35
+0.2
+
+ Training set Accuracy for n_hidden= 35 and lambdaval= 0.2 is 93.796%
+
+ Validation set Accuracy for n_hidden= 35 and lambdaval= 0.2 is 93.39%
+
+ Test set Accuracy for n_hidden=35 and lambdaval= 0.2 is 93.52%
+
+ Complexity for n_hidden=35 and lambdaval= 0.2 is 767.584910218
+35
+0.4
+
+ Training set Accuracy for n_hidden= 35 and lambdaval= 0.4 is 93.706%
+
+ Validation set Accuracy for n_hidden= 35 and lambdaval= 0.4 is 93.25%
+
+ Test set Accuracy for n_hidden=35 and lambdaval= 0.4 is 93.41%
+
+ Complexity for n_hidden=35 and lambdaval= 0.4 is 741.586723406
+35
+0.6000000000000001
+
+ Training set Accuracy for n_hidden= 35 and lambdaval= 0.6000000000000001 is 93.674%
+
+ Validation set Accuracy for n_hidden= 35 and lambdaval= 0.6000000000000001 is 93.19%
+
+ Test set Accuracy for n_hidden=35 and lambdaval= 0.6000000000000001 is 93.37%
+
+ Complexity for n_hidden=35 and lambdaval= 0.6000000000000001 is 744.664825335
+35
+0.8
+
+ Training set Accuracy for n_hidden= 35 and lambdaval= 0.8 is 93.666%
+
+ Validation set Accuracy for n_hidden= 35 and lambdaval= 0.8 is 93.21%
+
+ Test set Accuracy for n_hidden=35 and lambdaval= 0.8 is 93.46%
+
+ Complexity for n_hidden=35 and lambdaval= 0.8 is 734.950083046
+35
+1.0
+
+ Training set Accuracy for n_hidden= 35 and lambdaval= 1.0 is 94.128%
+
+ Validation set Accuracy for n_hidden= 35 and lambdaval= 1.0 is 93.65%
+
+ Test set Accuracy for n_hidden=35 and lambdaval= 1.0 is 93.81%
+
+ Complexity for n_hidden=35 and lambdaval= 1.0 is 747.450867038
+40
+0
+
+ Training set Accuracy for n_hidden= 40 and lambdaval= 0 is 93.088%
+
+ Validation set Accuracy for n_hidden= 40 and lambdaval= 0 is 92.87%
+
+ Test set Accuracy for n_hidden=40 and lambdaval= 0 is 93.07%
+
+ Complexity for n_hidden=40 and lambdaval= 0 is 860.913016603
+40
+0.2
+
+ Training set Accuracy for n_hidden= 40 and lambdaval= 0.2 is 93.296%
+
+ Validation set Accuracy for n_hidden= 40 and lambdaval= 0.2 is 93.09%
+
+ Test set Accuracy for n_hidden=40 and lambdaval= 0.2 is 93.19%
+
+ Complexity for n_hidden=40 and lambdaval= 0.2 is 1109.09710234
+40
+0.4
+
+ Training set Accuracy for n_hidden= 40 and lambdaval= 0.4 is 92.68%
+
+ Validation set Accuracy for n_hidden= 40 and lambdaval= 0.4 is 92.56%
+
+ Test set Accuracy for n_hidden=40 and lambdaval= 0.4 is 92.78%
+
+ Complexity for n_hidden=40 and lambdaval= 0.4 is 1060.1041378
+40
+0.6000000000000001
+
+ Training set Accuracy for n_hidden= 40 and lambdaval= 0.6000000000000001 is 93.644%
+
+ Validation set Accuracy for n_hidden= 40 and lambdaval= 0.6000000000000001 is 93.46%
+
+ Test set Accuracy for n_hidden=40 and lambdaval= 0.6000000000000001 is 93.48%
+
+ Complexity for n_hidden=40 and lambdaval= 0.6000000000000001 is 1063.59453041
+40
+0.8
+
+ Training set Accuracy for n_hidden= 40 and lambdaval= 0.8 is 93.73%
+
+ Validation set Accuracy for n_hidden= 40 and lambdaval= 0.8 is 93.52%
+
+ Test set Accuracy for n_hidden=40 and lambdaval= 0.8 is 93.69%
+
+ Complexity for n_hidden=40 and lambdaval= 0.8 is 1043.33905952
+40
+1.0
+
+ Training set Accuracy for n_hidden= 40 and lambdaval= 1.0 is 93.554%
+
+ Validation set Accuracy for n_hidden= 40 and lambdaval= 1.0 is 93.35%
+
+ Test set Accuracy for n_hidden=40 and lambdaval= 1.0 is 93.44%
+
+ Complexity for n_hidden=40 and lambdaval= 1.0 is 984.283503857
+45
+0
+
+ Training set Accuracy for n_hidden= 45 and lambdaval= 0 is 95.216%
+
+ Validation set Accuracy for n_hidden= 45 and lambdaval= 0 is 94.76%
+
+ Test set Accuracy for n_hidden=45 and lambdaval= 0 is 94.79%
+
+ Complexity for n_hidden=45 and lambdaval= 0 is 1208.66468594
+45
+0.2
+
+ Training set Accuracy for n_hidden= 45 and lambdaval= 0.2 is 94.876%
+
+ Validation set Accuracy for n_hidden= 45 and lambdaval= 0.2 is 94.39%
+
+ Test set Accuracy for n_hidden=45 and lambdaval= 0.2 is 94.68%
+
+ Complexity for n_hidden=45 and lambdaval= 0.2 is 937.444190939
+45
+0.4
+
+ Training set Accuracy for n_hidden= 45 and lambdaval= 0.4 is 94.592%
+
+ Validation set Accuracy for n_hidden= 45 and lambdaval= 0.4 is 94.23%
+
+ Test set Accuracy for n_hidden=45 and lambdaval= 0.4 is 94.5%
+
+ Complexity for n_hidden=45 and lambdaval= 0.4 is 858.551003944
+45
+0.6000000000000001
+
+ Training set Accuracy for n_hidden= 45 and lambdaval= 0.6000000000000001 is 95.012%
+
+ Validation set Accuracy for n_hidden= 45 and lambdaval= 0.6000000000000001 is 94.56%
+
+ Test set Accuracy for n_hidden=45 and lambdaval= 0.6000000000000001 is 94.83%
+
+ Complexity for n_hidden=45 and lambdaval= 0.6000000000000001 is 1036.43136175
+45
+0.8
+
+ Training set Accuracy for n_hidden= 45 and lambdaval= 0.8 is 94.54%
+
+ Validation set Accuracy for n_hidden= 45 and lambdaval= 0.8 is 94.15%
+
+ Test set Accuracy for n_hidden=45 and lambdaval= 0.8 is 94.46%
+
+ Complexity for n_hidden=45 and lambdaval= 0.8 is 811.757931725
+45
+1.0
+
+ Training set Accuracy for n_hidden= 45 and lambdaval= 1.0 is 94.612%
+
+ Validation set Accuracy for n_hidden= 45 and lambdaval= 1.0 is 94.14%
+
+ Test set Accuracy for n_hidden=45 and lambdaval= 1.0 is 94.55%
+
+ Complexity for n_hidden=45 and lambdaval= 1.0 is 786.761367965
+50
+0
+
+ Training set Accuracy for n_hidden= 50 and lambdaval= 0 is 94.716%
+
+ Validation set Accuracy for n_hidden= 50 and lambdaval= 0 is 94.55%
+
+ Test set Accuracy for n_hidden=50 and lambdaval= 0 is 94.67%
+
+ Complexity for n_hidden=50 and lambdaval= 0 is 1024.7761732
+50
+0.2
+
+ Training set Accuracy for n_hidden= 50 and lambdaval= 0.2 is 94.564%
+
+ Validation set Accuracy for n_hidden= 50 and lambdaval= 0.2 is 94.23%
+
+ Test set Accuracy for n_hidden=50 and lambdaval= 0.2 is 94.46%
+
+ Complexity for n_hidden=50 and lambdaval= 0.2 is 990.270162601
+50
+0.4
+
+ Training set Accuracy for n_hidden= 50 and lambdaval= 0.4 is 94.988%
+
+ Validation set Accuracy for n_hidden= 50 and lambdaval= 0.4 is 94.56%
+
+ Test set Accuracy for n_hidden=50 and lambdaval= 0.4 is 94.73%
+
+ Complexity for n_hidden=50 and lambdaval= 0.4 is 1058.79359612
+50
+0.6000000000000001
+
+ Training set Accuracy for n_hidden= 50 and lambdaval= 0.6000000000000001 is 93.694%
+
+ Validation set Accuracy for n_hidden= 50 and lambdaval= 0.6000000000000001 is 93.36%
+
+ Test set Accuracy for n_hidden=50 and lambdaval= 0.6000000000000001 is 93.8%
+
+ Complexity for n_hidden=50 and lambdaval= 0.6000000000000001 is 856.16981804
+50
+0.8
+
+ Training set Accuracy for n_hidden= 50 and lambdaval= 0.8 is 94.958%
+
+ Validation set Accuracy for n_hidden= 50 and lambdaval= 0.8 is 94.64%
+
+ Test set Accuracy for n_hidden=50 and lambdaval= 0.8 is 94.94%
+
+ Complexity for n_hidden=50 and lambdaval= 0.8 is 933.151852805
+50
+1.0
+
+ Training set Accuracy for n_hidden= 50 and lambdaval= 1.0 is 94.644%
+
+ Validation set Accuracy for n_hidden= 50 and lambdaval= 1.0 is 94.31%
+
+ Test set Accuracy for n_hidden=50 and lambdaval= 1.0 is 94.51%
+
+ Complexity for n_hidden=50 and lambdaval= 1.0 is 832.31082781
