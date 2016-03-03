@@ -2,6 +2,7 @@ import numpy as np
 from scipy.optimize import minimize
 from scipy.io import loadmat
 from math import sqrt
+import timeit
 import types
 import math
 import pickle
@@ -330,15 +331,13 @@ def nnPredict(w1,w2,data):
 """**************Neural Network Script Starts here********************************"""
 
 train_data, train_label, validation_data,validation_label, test_data, test_label = preprocess();
-n_hidden = 10;
+n_hidden = 4;
 
-while n_hidden < 51 :
+while n_hidden < 33 :
     #  Train Neural Network
 
     # set the number of nodes in input unit (not including bias unit)
     n_input = train_data.shape[1]; 
-
-
 
     # set the number of nodes in hidden unit (not including bias unit)
     # set the regularization hyper-parameter
@@ -356,6 +355,7 @@ while n_hidden < 51 :
     lambdaval=0
     while lambdaval<1.1:
             # set the number of nodes in output unit
+        startTime = timeit.default_timer();
         print (n_hidden)
         print (lambdaval)
         args = (n_input, n_hidden, n_class, train_data, train_label, lambdaval)
@@ -367,25 +367,31 @@ while n_hidden < 51 :
 
         predicted_label = nnPredict(w1,w2,train_data)
         complexity = np.sum(np.power(w1, 2)) + np.sum(np.power(w2,2))
+        endTime = timeit.default_timer();
             
         print('\n Training set Accuracy for n_hidden= '+str(n_hidden)+' and lambdaval= '+str(lambdaval)+' is ' + str(100*np.mean((predicted_label == train_label).astype(float))) + '%')
+        print('\n Training set Error for n_hidden= '+str(n_hidden)+' and lambdaval= '+str(lambdaval)+' is ' + str(100 - 100*np.mean((predicted_label == train_label).astype(float))) + '%')
 
         predicted_label = nnPredict(w1,w2,validation_data)
 
         print('\n Validation set Accuracy for n_hidden= ' +str(n_hidden)+' and lambdaval= '+str(lambdaval)+' is '+ str(100*np.mean((predicted_label == validation_label).astype(float))) + '%')
+        print('\n Validation set Error for n_hidden= ' +str(n_hidden)+' and lambdaval= '+str(lambdaval)+' is '+ str(100 - 100*np.mean((predicted_label == validation_label).astype(float))) + '%')
 
 
         predicted_label = nnPredict(w1,w2,test_data)
 
         print('\n Test set Accuracy for n_hidden=' +str(n_hidden)+' and lambdaval= '+str(lambdaval)+' is '+   str(100*np.mean((predicted_label == test_label).astype(float))) + '%')
+        print('\n Test set Error for n_hidden=' +str(n_hidden)+' and lambdaval= '+str(lambdaval)+' is '+   str(100 - 100*np.mean((predicted_label == test_label).astype(float))) + '%')
 
 
         print('\n Complexity for n_hidden=' +str(n_hidden)+' and lambdaval= '+str(lambdaval)+' is '+   str(complexity))
+
+        print('\n Runtime is ' + str(endTime - startTime))
 
         pickle.dump([n_input,n_hidden,w1,w2,lambdaval], open("Testl/pickles/params_"+str(n_hidden)+"_"+str(lambdaval)+".pickle", "wb"))
 
         lambdaval=lambdaval+0.2
         # n_hidden=n_hidden+5
-    n_hidden = n_hidden + 5
+    n_hidden = n_hidden + 4
     
 				   
